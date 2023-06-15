@@ -15,7 +15,8 @@ export default async function handler(req, res) {
     // Build the authorization URL
     let authUrl = `https://accounts.google.com/o/oauth2/v2/auth`
     authUrl += `?scope=https://www.googleapis.com/auth/calendar`
-    authUrl += `&access_type=offline`
+    authUrl += `&prompt=consent`;
+    authUrl += `&access_type=offline`;
     authUrl += `&include_granted_scopes=true`
     authUrl += `&response_type=code`
     authUrl += `&state=${req.query.key}`
