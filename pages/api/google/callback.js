@@ -2,6 +2,7 @@
     This is the callback page for the public OAuth flow. It obtains the access and refresh token
     encrypts them and redirects them with the obsidian protocol to the obsidian app.
 */
+import { scopeTest } from '@/helper/scopeTest';
 import crypto from 'crypto';
 
 export default async function handler(req, res) {
@@ -13,7 +14,7 @@ export default async function handler(req, res) {
 
   let { code, state, scope } = req.query;
 
-  if (!code || !state || !scope || scope != "https://www.googleapis.com/auth/calendar") {
+  if (!code || !state || !scope || !scopeTest(scope)) {
     res.status(400).send({ message: 'Request denied' })
     return
   }
@@ -32,13 +33,12 @@ export default async function handler(req, res) {
     })
   })
 
-  const token = await tokenResponse.json();
-
-  console.log(token);
+  let token = await tokenResponse.json();
+  let payload = [token.access_token, token.refresh_token];
 
   const rsaPublicKey = await crypto.subtle.importKey(
     "spki",
-    new Uint8Array(req.query.state.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))),
+    new Uint8Array(state.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))),
     {
       name: "RSA-OAEP",
       hash: "SHA-256",
@@ -46,9 +46,7 @@ export default async function handler(req, res) {
     true,
     ["encrypt"]
   );
-
-  const text = await crypto.subtle.encrypt("RSA-OAEP", rsaPublicKey, Buffer.from(JSON.stringify(token)));
-
+  const text = await crypto.subtle.encrypt("RSA-OAEP", rsaPublicKey, Buffer.from(JSON.stringify(payload)));
   res.redirect(`../../callback?token=${Buffer.from(text).toString('base64url')}&scope=${token.scope}`)
 }
 

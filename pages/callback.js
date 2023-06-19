@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { scopeTest } from "@/helper/scopeTest";
 
 export default function Home() {
   useEffect(() => {
@@ -9,16 +10,15 @@ export default function Home() {
     const scope = urlParams.get('scope');
     const token = urlParams.get('token');
 
-    console.log(token, scope, state);
-
     if (token && scope) {
       setTimeout(() => {
         // Remove the query params from the url
         window.history.replaceState({}, document.title, "/" + "callback");
 
         // Only allow calendar scope to minimize security risk of a stolen client.
-        // if (scope !== "https://www.googleapis.com/auth/calendar") return;
-        window.location = `obsidian://googleLogin?token=${token}`;
+        if (scopeTest(scope)) {
+          window.location = `obsidian://googleLogin?token=${token}&scope=${scope}`;
+        }
       }, 200)
       return;
     }
@@ -31,8 +31,9 @@ export default function Home() {
       if (!state || !scope) return;
 
       // Only allow calendar scope to minimize security risk of a stolen client.
-      // if (scope !== "https://www.googleapis.com/auth/calendar") return;
-      window.location = `obsidian://googleLogin?${params}`;
+      if (scopeTest(scope)) {
+        window.location = `obsidian://googleLogin?${params}`;
+      }
     }, 200)
 
   }, [])
