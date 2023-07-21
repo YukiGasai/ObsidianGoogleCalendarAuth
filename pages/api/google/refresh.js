@@ -1,4 +1,6 @@
-// Token refresh endpoint to get a new access token from a refresh token
+/*
+    Token refresh endpoint to get a new access token from a refresh token
+*/
 export default async function handler(req, res) {
     // Only allow POST requests to make sure the refresh token is not exposed
     if (req.method !== 'POST') {
@@ -6,13 +8,14 @@ export default async function handler(req, res) {
         return
     }
 
-    // Check if the request has a key query parameter for the encryption of the token
+    // Check if the request has a refresh token
     if (!req.body.refresh_token) {
         res.status(400).send({ message: 'Request denied' })
         return
     }
     let refreshUrl = `https://oauth2.googleapis.com/token`
 
+    // Exchange the refresh token for a new access token
     const tokenRequest = await fetch(refreshUrl, {
         method: 'POST',
         headers: {
@@ -26,7 +29,9 @@ export default async function handler(req, res) {
         })
     })
 
+    // Convert the response to json
     const token = await tokenRequest.json();
 
+    // Return the new token
     return res.status(200).json(token)
 }

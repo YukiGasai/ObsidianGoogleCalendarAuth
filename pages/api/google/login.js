@@ -1,4 +1,6 @@
-// Login API endpoint to start the PKCE Authorization Code Flow with Google
+/*
+    Login API endpoint to start the PKCE Authorization Code Flow with Google
+*/
 export default async function handler(req, res) {
     // Only allow GET requests to make sure the user is using a browser
     if (req.method !== 'GET') {
@@ -20,7 +22,7 @@ export default async function handler(req, res) {
     authUrl += `&include_granted_scopes=true`
     authUrl += `&response_type=code`
     authUrl += `&state=${req.query.key}`
-    authUrl += `&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}`
+    authUrl += `&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}` // get secrets from the environment variables using dotenv
     authUrl += `&client_id=${process.env.GOOGLE_CLIENT_ID}`
 
     // Redirect the user to the authorization URL
