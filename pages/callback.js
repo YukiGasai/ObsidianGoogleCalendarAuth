@@ -66,7 +66,7 @@ export default function Callback() {
         </article>
 
         <article className={style.card}>
-          <h3 className={style.question}>Obsidian doesn't show up</h3>
+          <h3 className={style.question}>Obsidian doesn&#39;t show up</h3>
           <p className={style.answer}>Depending on you browser, you can try select the Obsidian application <a className="fancyLink" href="https://i.imgur.com/5Og6RGA.png">directly</a>.</p>
         </article>
 
@@ -77,7 +77,7 @@ export default function Callback() {
 
         <article className={style.card}>
           <h3 className={style.question}>How can I select the vault I want to use?</h3>
-          <p className={style.answer}>The vault can't be selected from outside of Obsidian. To make sure the write vault is being used. Close all open obsidian windows except the vault use want to use.</p>
+          <p className={style.answer}>The vault can&#39;t be selected from outside of Obsidian. To make sure the write vault is being used. Close all open obsidian windows except the vault use want to use.</p>
         </article>
 
         <article className={style.card}>
@@ -86,7 +86,7 @@ export default function Callback() {
         </article>
 
         <article className={style.card}>
-          <h3 className={style.question}>This doesn't work?</h3>
+          <h3 className={style.question}>This doesn&#39;t work?</h3>
           <p className={style.answer}>If you have tested all the previous steps you can ask for help on <a className="fancyLink" href="https://github.com/YukiGasai/obsidian-google-calendar/discussions">Github</a>.</p>
         </article>
 
