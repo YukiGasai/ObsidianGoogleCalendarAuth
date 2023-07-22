@@ -1,0 +1,286 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+
+@keyframes background-pan {
+  from {
+    background-position: 0% center;
+  }
+  to {
+    background-position: -200% center;
+  }
+}
+
+.h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  animation: background-pan 3s linear infinite;
+  background: linear-gradient(90deg,#ff8a00,#e52e71,#ff8a00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200%;
+}
+
+.h2 {
+  font-size: 1rem; 
+  color: var(--text);
+}
+
+.h3 {
+  font-size: 1.5rem;
+  color: var(--text);
+  text-align: center;
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+.cardGroup {
+  margin-top: 60px;
+}
+
+.cardGroup,
+.card {
+  display: flex;
+  aspect-ratio: 5 / 7;
+}
+
+.cardGroup,
+.bigCard {  
+  width: 30vmin;
+}
+
+.cardGroup {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  position: relative;
+  transition: transform 400ms ease;
+  margin-bottom:  150px;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+  position: absolute;
+  transition: transform 800ms cubic-bezier(.05,.43,.25,.95);
+  
+  background-position: center;
+  background-size: cover;
+}
+
+.bigCard {
+  border-radius: 1vmin;
+}
+
+.littleCard {
+  width: 20vmin;
+  border-radius: 2vmin;
+  aspect-ratio: 7 / 5;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: -1vmin 1vmin 2vmin rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.bigCard:nth-child(2) {
+  background-image: url("https://i.imgur.com/c6WrSen.png");
+  transform: translateX(-10%) rotate(-1deg);
+}
+
+.bigCard:nth-child(4) {
+  background-image: url("https://i.imgur.com/CEQHjJH.png");
+  transform: rotate(2deg);
+}
+
+.bigCard:nth-child(6) {
+  background-image: url("https://i.imgur.com/eR2jIEa.png");
+  transform: translateX(-6%) rotate(-3deg);
+}
+
+.bigCard:nth-child(8) {
+  background-image: url("https://i.imgur.com/yx5tZdG.png");
+  transform: translate(10%, 3%) rotate(5deg);
+}
+
+.littleCard:nth-child(1) {
+  background-image: url("https://i.imgur.com/CeqUTHL.png");
+}
+
+.littleCard:nth-child(3) {
+  background-image: url("https://i.imgur.com/3yD78tI.png");
+}
+
+.littleCard:nth-child(5) {
+  background-image: url("https://i.imgur.com/6d9gDU3.png");
+}
+
+.littleCard:nth-child(7) {
+  background-image: url("https://i.imgur.com/U2FKf2D.png");
+}
+
+.cardGroup:hover > .card {  
+  box-shadow: -2vmin 2vmin 3vmin rgba(0, 0, 0, 0.4);
+}
+
+.cardGroup:hover > .bigCard:nth-child(2) {
+  transform: translate(-75%, 16%) rotate(-24deg);
+}
+
+.cardGroup:hover > .bigCard:nth-child(4) {
+  transform: translate(-25%, 8%) rotate(-8deg);
+}
+
+.cardGroup:hover > .bigCard:nth-child(6) {
+  transform: translate(25%, 8%) rotate(8deg);
+}
+
+.cardGroup:hover > .bigCard:nth-child(8) {
+  transform: translate(75%, 16%) rotate(24deg);
+}
+
+.cardGroup:hover > .littleCard:nth-child(1) {
+  transform: translate(200%, -160%) rotate(-15deg);
+}
+
+.cardGroup:hover > .littleCard:nth-child(3) {
+  transform: translate(160%, 170%) rotate(15deg);
+}
+
+.cardGroup:hover > .littleCard:nth-child(5) {
+  transform: translate(-200%, -170%) rotate(15deg);
+}
+
+.cardGroup:hover > .littleCard:nth-child(7) {
+  transform: translate(-280%, 140%) rotate(-15deg);
+}
+
+
+.why {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  justify-content: center;
+  align-items: center;
+}
+.question {
+  font-size: 32px;
+  letter-spacing: -2px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+}
+
+.reasons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.reasonContainer {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  padding: 3em;
+  background-color: #0d0d0d;
+  border-radius: 16px;
+}
+
+
+.h4 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 10px 0;
+  color: var(--text);
+}
+
+.smallText {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  color: var(--text);
+  text-align: center;
+}
+
+.bento {
+  display: flex;
+  width: 80vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  margin-bottom: 50px;
+}
+
+.userOption {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0;
+  margin-top: 200px;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.userOption > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  height: 200px;
+}
+
+.documentationBox{
+  background-color: var(--primary);
+  grid-area: 1 / 1 / 2 / 5;
+}
+
+.donateBox{
+  background-color: var(--secondary);
+  grid-area: 1 / 5 / 2 / 6;
+  
+}
+
+.contributionBox{
+  background-color: var(--text);
+  grid-area: 2 / 1 / 3 / 4;
+  color: var(--secondary);
+
+}
+
+.downloadBox {
+  background-color: var(--accent);
+  grid-area: 2 / 4 / 3 / 6;
+  color: var(--background);
+}
+
+@media screen and (max-width: 750px) {
+  .reasons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .reasonContainer {
+    width: 80%;
+    margin-bottom: 50px;
+  }
+
+  .userOption {
+    display: flex;
+    flex-direction: column;
+  }
+}

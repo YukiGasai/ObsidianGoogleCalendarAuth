@@ -11,7 +11,6 @@ export default function Imprint() {
       </span>
       <h4>Kontaktdaten:</h4>
       <span>
-        Telefon: + 49 (0) 176 76987040<br />
         E-Mail-Adresse: r.lindede@googlemail.com<br />
       </span>
       <h4>Haftung für Inhalte:</h4>
@@ -27,7 +26,6 @@ export default function Imprint() {
       </span>
       <h4>Contact details:</h4>
       <span>
-        Phone: + 49 (0) 176 76987040<br />
         E-Mail: r.lindede@googlemail.com<br />
       </span>
       <h4>Liability for contents:</h4>

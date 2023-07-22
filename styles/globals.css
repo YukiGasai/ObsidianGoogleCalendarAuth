@@ -1,11 +1,25 @@
+html {
+  --text: #fafafa;
+  --background: #050505;
+  --primary: #4e39ac;
+  --secondary: #120d26;
+  --accent: rgb(154, 140, 217);
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: #1E1E1E;
+  font-family: Roboto, sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+}
 
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
 a {
@@ -15,62 +29,46 @@ a {
 
 * {
   box-sizing: border-box;
-  font-family: Consolas !important;
-  color: white;
+  text-align: center;
 }
 
-.main{
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+.fancyLink {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+/*Footer Styles*/
+
+.footerContainer {
+  margin-top: auto;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  justify-self: center;
+  align-self: center;
+  border-top: 1px solid var(--primary);
+  width: min-content;
+  height: min-content;
+  padding: 10px;
 }
 
-h1, h2 {
-  color: #987EF1;
-  font-size: 64px;
-  text-align: center;
-  font-family: Consolas;
-}
-
-h2 {
-  font-size: 48px;
-}
-
-.ShortDescription{
-  width: 451px;
-  color: #987EF1;
-  font-size: 24px;
-  text-align: center;
-}
-
-.viewDisplayContainer{
-  width:100%;
-  padding: 32px 100px;
+.footerList {
   display: flex;
-  background-color: #303030;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
 }
 
-
-@media screen and (max-width: 1000px) {
-  .viewDisplayContainer {
-    flex-direction: column;
-  }
-}
-
-
-.viewDisplayItem{
+.footerItemText {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.viewDisplayItem span {
-  color: white;
-  font-size: 40px;
-}
-
-.openDialog{
-  padding-top: 200px;
+  flex-direction: row;
+  color: var(--text);
+  font-size: 16px;
+  margin: 0 20px 0 20px;
+  align-self: center;
+  list-style: none;
 }

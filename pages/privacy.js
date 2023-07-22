@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function Home() {
+export default function Privacy() {
     return (
         <div>
             <h1>Privacy Policy</h1>
