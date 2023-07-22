@@ -1,8 +1,8 @@
 /*
     Helper function to make sure that only scopes String only contains calendar scopes
 */
-export const scopeTest = (scopesString) => {
-
+export const scopeTest = (scopesString ) => {
+    if(!scopesString) return true;
     const scopes = scopesString.split(" ");
 
     // Allow only calendar scopes

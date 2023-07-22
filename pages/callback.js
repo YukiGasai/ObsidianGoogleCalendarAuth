@@ -16,6 +16,11 @@ export default function Callback() {
     const scope = urlParams.get('scope');
     const token = urlParams.get('token');
 
+    // Only allow calendar scope to minimize security risk of a stolen client.
+    if (!scopeTest(scope)) {
+      window.location = '/400.html'
+    }
+
     // Check if the url contains the required parameters for the code server flow
     if (token && scope) {
       // Add a delay to make sure the browser has time to redirect to the obsidian app
@@ -23,10 +28,7 @@ export default function Callback() {
         // Remove the query params from the url
         window.history.replaceState({}, document.title, "/" + "callback");
 
-        // Only allow calendar scope to minimize security risk of a stolen client.
-        if (scopeTest(scope)) {
-          window.location = `obsidian://googleLogin?token=${token}&scope=${scope}`;
-        }
+        window.location = `obsidian://googleLogin?token=${token}&scope=${scope}`;
       }, 200)
       return;
     }
@@ -38,11 +40,9 @@ export default function Callback() {
       window.history.replaceState({}, document.title, "/" + "callback");
       if (!state || !scope) return;
 
-      // Only allow calendar scope to minimize security risk of a stolen client.
-      if (scopeTest(scope)) {
-        // Redirect to the obsidian app with all parameters
-        window.location = `obsidian://googleLogin?${params}`;
-      }
+      // Redirect to the obsidian app with all parameters
+      window.location = `obsidian://googleLogin?${params}`;
+    
     }, 200)
 
   }, [])

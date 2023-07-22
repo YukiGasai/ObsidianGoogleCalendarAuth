@@ -2,6 +2,7 @@
     Token refresh endpoint to get a new access token from a refresh token
 */
 export default async function handler(req, res) {
+    
     // Only allow POST requests to make sure the refresh token is not exposed
     if (req.method !== 'POST') {
         res.status(405).send({ message: 'Only POST requests allowed' })

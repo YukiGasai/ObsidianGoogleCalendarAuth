@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>400 Bad Request</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+</head>
+
+<body>
+    <script>
+        let panels = []
+        let canvas;
+        let pause = 0;
+        const error = document.currentScript.getAttribute('error') ?? 400;
+
+        // Set up the canvas so that it fills the window without any black bars
+        function setCanvasSize(windowWidth, windowHeight) {
+            const size = Math.max(windowWidth, windowHeight) + 300;
+            resizeCanvas(size, size);
+            return size;
+        }
+
+        // Create panels that are shown on the screen
+        function initPanels(size) {
+            panels = [];
+
+            for (let y = 0; y < size; y = y + 173) {
+                for (let x = 0; x < size; x = x + 300) {
+                    panels.push(new Panel(x, y, int(random(0, 1000))));
+                    panels.push(new Panel(x + 150, y + 87, int(random(0, 1000))));
+                }
+            }
+        }
+
+        // P5js setup function - https://p5js.org/reference/#/p5/setup
+        function setup() {
+            frameRate(10);
+
+            // Get canvas Object from html with class
+            canvas = createCanvas(0, 0);
+            canvas.class("p5Canvas");
+            const size = setCanvasSize(windowWidth, windowHeight);
+
+            // Create panels
+            initPanels(size);
+        }
+
+        // P5js draw function - https://p5js.org/reference/#/p5/draw
+        function draw() {
+            pause = pause - 1;
+            if (pause > 0) {
+                return;
+            }
+
+            background(0);
+
+            panels.forEach(panel => {
+                if (int(random(0, 10) < 7)) {
+                    panel.update(random(0, 100), 1);
+                } else {
+                    panel.update(random(0, 100), -1);
+                }
+                panel.draw();
+            });
+        }
+
+        function windowResized() {
+            const size = setCanvasSize(windowWidth, windowHeight);
+            initPanels(size);
+            // To prevent flashing on resize
+            pause = 4;
+        }
+
+        function hexagon(x, y, radius) {
+            let angle = TWO_PI / 6;
+            beginShape();
+            for (let a = 0; a < TWO_PI; a += angle) {
+                let sx = x + cos(a) * radius;
+                let sy = y + sin(a) * radius;
+                vertex(sx, sy);
+            }
+            endShape(CLOSE);
+        }
+
+        class Panel {
+
+            x = 0;
+            y = 0;
+            age = 0;
+
+            constructor(x, y, age) {
+                this.x = x;
+                this.y = y;
+                this.age = age;
+            };
+
+            update(time, direction) {
+                this.age = this.age + time * direction;
+                if (this.age > 1000) this.age = random(0, 1000);
+                this.color = map(this.age, 0, 1000, 0, 255);
+            }
+
+            draw() {
+                strokeWeight(2);
+
+                // Base red panel
+                fill(this.color, 0, 0);
+                hexagon(this.x, this.y, 100, 6);
+
+                // black inner outline
+                fill(0, 0, 0, 0);
+                hexagon(this.x, this.y, 90, 6);
+
+                // Inner text
+                fill(0)
+                textSize(20);
+                text("▲", this.x - 10, this.y - 30);
+                if (this.age < 333) {
+                    text("EMERGENCY", this.x - 60, this.y + 5);
+                } else if (this.age < 666) {
+                    text("ERROR " + error, this.x - 55, this.y + 5);
+                } else {
+                    text("WARNING", this.x - 50, this.y + 5);
+                }
+                text("▼", this.x - 10, this.y + 40);
+            }
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            background: black;
+        }
+
+        .textContainer:hover {
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        .textContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0);
+            transition: background 1s;
+            text-decoration: none;
+        }
+
+        .errorText {
+            font-family: 'Roboto', sans-serif;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 6px;
+            text-align: center;
+            font-size: 10vw;
+            color: rgb(255, 255, 255);
+            z-index: 10;
+            margin: 0;
+        }
+
+        .errorSubText {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            font-size: 6vw;
+            color: rgb(255, 255, 255);
+            z-index: 10;
+            margin: 0;
+        }
+
+        .p5Canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
+    <a class="textContainer" href="/">
+        <span class="errorText">▲</span>
+        <span class="errorText" class="ACCDENIED">ERROR 400</span>
+        <span class="errorSubText" class="ACCDENIED">Bad Request</span>
+        <span class="errorText">▼</span>
+    </a>
+
+    <canvas class="p5Canvas"></canvas>
+    <script src="main.js" error="400"></script>
+</body>
+</html>
