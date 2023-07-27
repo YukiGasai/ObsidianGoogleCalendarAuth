@@ -5,9 +5,9 @@ export default function Custom404() {
         window.location.href = '/404.html';
     }, []);
     return (
-    <div class="textContainer">
-        <div class="headerContainer">
-            <h1 class="headerText">404</h1>
+    <div className="textContainer">
+        <div className="headerContainer">
+            <h1 className="headerText">404</h1>
         </div>
     </div>
     );

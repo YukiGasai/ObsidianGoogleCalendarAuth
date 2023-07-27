@@ -5,9 +5,9 @@ export default function Custom400() {
         window.location.href = '/400.html';
     }, []);
     return (
-    <div class="textContainer">
-        <div class="headerContainer">
-            <h1 class="headerText">400</h1>
+    <div className="textContainer">
+        <div className="headerContainer">
+            <h1 className="headerText">400</h1>
         </div>
     </div>
     );

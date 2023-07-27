@@ -18,7 +18,7 @@ export default function Callback() {
 
     // Only allow calendar scope to minimize security risk of a stolen client.
     if (!scopeTest(scope)) {
-      window.location = '/400.html'
+      window.location = '/400'
     }
 
     // Check if the url contains the required parameters for the code server flow
